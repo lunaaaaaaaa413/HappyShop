@@ -15,6 +15,8 @@ import ci553.happyshop.storageAccess.DatabaseRWCreator;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.util.Scanner;
+
 /**
  * The main JavaFX application class. This class can be executed directly
  * and starts all HappyShop clients (UIs).
@@ -47,16 +49,21 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage window) {
-        startCustomerClient();
-        startPickerClient();
-        startOrderDashboard();
+        Scanner s = new Scanner(System.in);
+        System.out.println("Do you want to launch this program in 1 Single [Default] or 2 Multi user mode\n1/2");
+        String input = s.nextLine();
+        if (input.equals("2")) {
+            startCustomerClient();
+            startPickerClient();
+            startOrderDashboard();
+        }
 
         startCustomerClient();
         startPickerClient();
         startOrderDashboard();
 
         startWarehouseClient();
-        startWarehouseClient();
+        if (input.equals("2")) {startWarehouseClient();}
 
         // Initializes the order map for the OrderHub.
         // Must be called after starting observer clients (Order_Dashboard and Picker clients)
